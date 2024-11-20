@@ -48,12 +48,11 @@ public class Pedido {
     }
 
     public void retiraItem(String nome){
-        for(ItemPedido item : itens){
-            if(item.getNome().equalsIgnoreCase(nome)){
-                itens.remove(item);
-            }
+        boolean removido = itens.removeIf(item -> item.getNome().equalsIgnoreCase(nome));
+
+        if (!removido) {
+            throw new RuntimeException("Item não encontrado no pedido.");
         }
-        throw new RuntimeException("Item nao encontrado no pedido");
     }
 
     @Override
